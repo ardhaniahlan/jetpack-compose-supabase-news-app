@@ -40,6 +40,19 @@ class NewsViewModel @Inject constructor(
         }
     }
 
+    fun searchNews(query: String, page: Int = 1) {
+        viewModelScope.launch {
+            _uiState.update { it.copy(newsState = ViewState.Loading) }
+
+            val result = newsRepository.searchNews(query, page)
+            result.onSuccess { articles ->
+                _uiState.update { it.copy(newsState = ViewState.Success(articles)) }
+            }.onFailure { e ->
+                _uiState.update { it.copy(newsState = ViewState.Error(e.message ?: "Terjadi Kesalahan")) }
+            }
+        }
+    }
+
     fun onArticleClick(article: Article) {
         viewModelScope.launch {
             _eventFlow.emit(UiEvent.NavigateToDetail(article))

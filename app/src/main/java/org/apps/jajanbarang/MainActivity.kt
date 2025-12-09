@@ -69,7 +69,7 @@ class MainActivity : ComponentActivity() {
                             SplashScreen(navController)
                         }
                         composable("login"){
-                            LoginScreen(navController, snackbarHostState)
+                            LoginScreen(navController)
                         }
                         composable("register"){
                             RegisterScreen(navController, snackbarHostState)

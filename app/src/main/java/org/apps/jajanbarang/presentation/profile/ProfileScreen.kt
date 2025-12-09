@@ -21,6 +21,7 @@ import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -73,10 +74,13 @@ fun ProfileScreen(
 
     LaunchedEffect(Unit) {
         authViewModel.eventFlow.collect { event ->
-            if (event == UiEvent.Navigate) {
-                navController.navigate("login") {
-                    popUpTo("profile") { inclusive = true }
+            when (event) {
+                is UiEvent.Navigate -> {
+                    navController.navigate("login") {
+                        popUpTo(0)
+                    }
                 }
+                else -> Unit
             }
         }
     }
@@ -175,11 +179,12 @@ fun ProfileScreen(
                             text = "Account Settings",
                             modifier = Modifier.padding(horizontal = 20.dp),
                             fontFamily = poppinsFontFamily,
-                            fontWeight = FontWeight.SemiBold,
-                            color = Color.DarkGray
+                            fontWeight = FontWeight.Normal,
+                            color = Color.DarkGray,
+                            fontSize = 14.sp
                         )
 
-                        Spacer(Modifier.height(10.dp))
+                        Spacer(Modifier.height(8.dp))
 
                         Column(
                             modifier = Modifier
@@ -190,13 +195,16 @@ fun ProfileScreen(
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .clickable { /* NAVIGATE TO PERSONAL INFO */ }
+                                    .clickable {  }
                                     .padding(vertical = 16.dp),
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.SpaceBetween
                             ) {
 
                                 Row(verticalAlignment = Alignment.CenterVertically) {
+
+                                    Spacer(Modifier.width(14.dp))
+
                                     Icon(
                                         imageVector = Icons.Default.Person,
                                         contentDescription = null,
@@ -209,8 +217,8 @@ fun ProfileScreen(
                                     Text(
                                         text = "Personal Information",
                                         fontFamily = poppinsFontFamily,
-                                        fontWeight = FontWeight.Medium,
-                                        fontSize = 16.sp
+                                        fontWeight = FontWeight.Normal,
+                                        fontSize = 14.sp
                                     )
                                 }
 
@@ -221,34 +229,58 @@ fun ProfileScreen(
                                 )
                             }
 
-                            Divider(
-                                color = Color.LightGray.copy(alpha = 0.4f),
-                                thickness = 1.dp
-                            )
                         }
 
-                        Spacer(Modifier.weight(1f))
+                        Spacer(Modifier.height(20.dp))
 
-                        Button(
+                        Text(
+                            text = "Other",
+                            modifier = Modifier.padding(horizontal = 20.dp),
+                            fontFamily = poppinsFontFamily,
+                            fontWeight = FontWeight.Normal,
+                            fontSize = 14.sp,
+                            color = Color.DarkGray
+                        )
+
+                        Spacer(Modifier.height(8.dp))
+
+                        Column(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(horizontal = 20.dp, vertical = 20.dp),
-                            contentPadding = PaddingValues(
-                                horizontal = 32.dp,
-                                vertical = 14.dp
-                            ),
-                            onClick = { showDialog = true },
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = Color(0xFFE53935)
-                            ),
-                            shape = RoundedCornerShape(12.dp)
+                                .padding(horizontal = 20.dp)
                         ) {
-                            Text(
-                                text = "Logout",
-                                fontFamily = poppinsFontFamily,
-                                fontWeight = FontWeight.SemiBold,
-                                color = Color.White
-                            )
+
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clickable { showDialog = true }
+                                    .padding(vertical = 16.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+
+                                    Spacer(Modifier.width(14.dp))
+
+                                    Icon(
+                                        imageVector = Icons.Default.Logout,
+                                        contentDescription = null,
+                                        tint = Color.Black,
+                                        modifier = Modifier.size(26.dp)
+                                    )
+
+                                    Spacer(Modifier.width(14.dp))
+
+                                    Text(
+                                        text = "Logout",
+                                        fontFamily = poppinsFontFamily,
+                                        fontWeight = FontWeight.Normal,
+                                        fontSize = 14.sp
+                                    )
+                                }
+                            }
+
                         }
 
                         if (showDialog) {

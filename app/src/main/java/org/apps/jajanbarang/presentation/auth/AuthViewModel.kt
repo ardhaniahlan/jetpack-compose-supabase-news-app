@@ -62,16 +62,11 @@ class AuthViewModel @Inject constructor(private val repository: AuthRepository):
         viewModelScope.launch {
             try {
                 repository.logout()
-                Log.d("AuthViewModel", "Logout dari auth berhasil")
+                _uiState.value = AuthState()
+                _eventFlow.emit(UiEvent.Navigate)
             } catch (e: Exception) {
-                Log.e("AuthViewModel", "Logout error: ${e.message}")
+                throw e
             }
-
-            // ✅ Clear authState (tidak perlu _currentUser terpisah)
-            _uiState.value = AuthState()
-            Log.d("AuthViewModel", "AuthState cleared to Idle")
-
-            _eventFlow.emit(UiEvent.Navigate)
         }
     }
 

@@ -2,6 +2,7 @@ package org.apps.jajanbarang.presentation.auth
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -38,6 +40,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -59,7 +62,6 @@ import org.apps.jajanbarang.ui.theme.poppinsFontFamily
 @Composable
 fun LoginScreen(
     navController: NavController,
-    snackbarHostState: SnackbarHostState,
     authViewModel: AuthViewModel = hiltViewModel()
 ){
     val uiState by authViewModel.uiState.collectAsState()
@@ -67,9 +69,6 @@ fun LoginScreen(
     LaunchedEffect(Unit) {
         authViewModel.eventFlow.collect { event ->
             when (event) {
-                is UiEvent.ShowSnackbar -> {
-                    snackbarHostState.showSnackbar(message = event.message)
-                }
                 is UiEvent.Navigate -> {
                     navController.navigate("news") {
                         popUpTo("login") { inclusive = true }
@@ -104,8 +103,24 @@ fun LoginScreen(
         val isActionLoading = uiState.authState is ViewState.Loading
 
         if (isActionLoading) {
-            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Black.copy(alpha = 0.3f))
+                    .pointerInput(Unit) {
+                        detectTapGestures { }
+                    },
+                contentAlignment = Alignment.Center
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(50.dp),
+                        color = BluePrimary
+                    )
+                }
             }
         }
     }
