@@ -1,0 +1,14 @@
+package org.apps.jajanbarang.domain.model
+
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class User(
+    val id: String,
+    val email: String,
+    val name: String?,
+    val phone: String? = "",
+    @SerialName("avatar_url")
+    val avatarUrl: String? = ""
+)
