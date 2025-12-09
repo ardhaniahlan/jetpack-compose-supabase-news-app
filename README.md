@@ -46,3 +46,5 @@ Dibangun dengan arsitektur **MVVM + Repository Pattern**, aplikasi ini memiliki 
 
 Struktur arsitektur proyek mengikuti pola: Interface → Repository → ViewModel → UI (Jetpack Compose)
 
+![NewsApp](https://github.com/ardhaniahlan/jetpack-compose-supabase-news-app/blob/main/newsapp.gif)
+
