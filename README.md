@@ -34,7 +34,7 @@ Dibangun dengan arsitektur **MVVM + Repository Pattern**, aplikasi ini memiliki 
 | **MVVM Architecture** | Manajemen state & data |
 | **Hilt** | Dependency Injection |
 | **Retrofit** | Konsumsi API NewsAPI |
-| **Supabase Auth** | Login, register, session |
+| **Supabase Auth** | Login & register |
 | **Supabase Database** | Menyimpan profil user |
 | **StateFlow / Coroutine** | Reactive state |
 | **Coil** | Load image |
