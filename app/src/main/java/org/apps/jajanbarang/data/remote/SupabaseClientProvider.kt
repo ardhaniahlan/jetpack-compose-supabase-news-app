@@ -7,8 +7,8 @@ import io.github.jan.supabase.postgrest.Postgrest
 object SupabaseClientProvider {
     val client by lazy {
         createSupabaseClient(
-            supabaseUrl = "https://clbkwxcajmtnukrgyfah.supabase.co",
-            supabaseKey = "sb_publishable_4Ttl4hPC4tJTGRj_ysTw8A_fre6Lk64"
+            supabaseUrl = "erl_supabase",
+            supabaseKey = "your_api_keys"
         ) {
             install(Auth)
             install(Postgrest)
