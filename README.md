@@ -34,7 +34,7 @@ Dibangun dengan arsitektur **MVVM + Repository Pattern**, aplikasi ini memiliki 
 | **MVVM Architecture** | Manajemen state & data |
 | **Hilt** | Dependency Injection |
 | **Retrofit** | Konsumsi API NewsAPI |
-| **Supabase Auth** | Login, register, session |
+| **Supabase Auth** | Login & register |
 | **Supabase Database** | Menyimpan profil user |
 | **StateFlow / Coroutine** | Reactive state |
 | **Coil** | Load image |
@@ -45,4 +45,6 @@ Dibangun dengan arsitektur **MVVM + Repository Pattern**, aplikasi ini memiliki 
 ## 📐 Arsitektur
 
 Struktur arsitektur proyek mengikuti pola: Interface → Repository → ViewModel → UI (Jetpack Compose)
+
+<img src="https://raw.githubusercontent.com/ardhaniahlan/jetpack-compose-supabase-news-app/main/newsapp.gif" width="300" alt="News App">
 
